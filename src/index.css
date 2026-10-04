@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", system-ui, "Segoe UI", Tahoma, sans-serif;
+  --font-hand: "Aref Ruqaa", "Cairo", serif;
+
+  --color-forest-950: #0F2A1C;
+  --color-forest-900: #143523;
+  --color-forest: #1E4A33;
+  --color-forest-700: #2A5F43;
+  --color-forest-100: #E3ECE4;
+
+  --color-cream: #FAF5EA;
+  --color-cream-200: #F3EBDA;
+  --color-cream-300: #EADFC8;
+  --color-paper: #FFFDF8;
+
+  --color-lime: #B9D54A;
+  --color-lime-300: #D3E68A;
+  --color-lime-100: #EEF5D2;
+
+  --color-orange: #E3742B;
+  --color-orange-700: #B95518;
+  --color-orange-100: #FCE6D5;
+
+  --color-ink: #17251C;
+  --color-muted: #5B685F;
+  --color-line: #E5DAC4;
+
+  --shadow-soft: 0 1px 2px rgb(23 37 28 / 0.04), 0 8px 24px -12px rgb(23 37 28 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(23 37 28 / 0.05), 0 18px 40px -18px rgb(23 37 28 / 0.28);
+
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    font-feature-settings: "kern";
+  }
+  section[id] { scroll-margin-top: 7.5rem; }
+  ::selection { background: var(--color-lime-300); color: var(--color-forest-950); }
+  :focus-visible {
+    outline: 2.5px solid var(--color-orange);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  img { user-select: none; }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 h-12 text-[15px] font-bold transition-[background-color,color,box-shadow,transform] duration-200 active:scale-[0.97] select-none;
+  }
+  .btn-primary {
+    @apply bg-forest text-cream hover:bg-forest-900 shadow-[0_8px_20px_-10px_rgb(30_74_51/0.7)];
+  }
+  .btn-ghost {
+    @apply border border-forest/20 text-forest hover:border-forest/50 hover:bg-forest-100/60;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[13px] font-bold text-forest-700;
+  }
+  .demo-tag {
+    @apply inline-flex items-center gap-1 rounded-md bg-cream-200 px-1.5 py-0.5 text-[11px] font-semibold text-muted;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-cream-200) 0%, var(--color-cream) 50%, var(--color-cream-200) 100%);
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
